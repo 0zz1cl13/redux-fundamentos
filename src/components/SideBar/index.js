@@ -1,40 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class SideBar extends Component {
-  state = {
-    modules: [
-      { id: 1, 
-        title: 'Iniciando com React',
-        lessons: [
-          { id: 1, title: 'Primeira aula' },
-          { id: 2, title: 'Segunda aula' },
-        ]
-      },
-      { id: 2, 
-        title: 'Aprendendo Redux',
-        lessons: [
-          { id: 1, title: 'Terceira aula' },
-          { id: 2, title: 'Quarta aula' },
-        ]
-      }
-    ]
-  };
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-  render() {
-    const { modules } = this.state;
-    return (
-      <aside>
-        { modules.map(module => (
-          <div key={module.id}>
-            <strong>{module.title}</strong>
-            <ul>
-              {module.lessons.map(lesson => (
-                <li key={lesson.id}>{lesson.title}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </aside>
-    );
-  }
-}
+import * as CourseActions from '../../store/actions/course';
+
+const Sidebar = ({ modules, toggleLesson }) => (
+  <aside>
+    { modules.map(module => (
+      <div key={module.id}>
+        <strong>{module.title}</strong>
+        <ul>
+          {module.lessons.map(lesson => (
+            <li key={lesson.id}>
+              {lesson.title}
+              <button onClick={() => toggleLesson(module, lesson)}>Active</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </aside>
+);
+
+const mapStateToProps = state => ({
+  modules: state.course.modules
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators(CourseActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
