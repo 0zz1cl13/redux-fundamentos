@@ -10,7 +10,7 @@ const Video = ({ activeModule, activeLesson }) => (
     </div>
 );
 
-export default connect(state => ({
+export default connect (state => ({
   activeModule: state.course.activeModule,
   activeLesson: state.course.activeLesson
 }))(Video);

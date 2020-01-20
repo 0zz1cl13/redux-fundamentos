@@ -25,7 +25,11 @@ const Sidebar = ({ modules, toggleLesson }) => (
 
 const mapStateToProps = state => ({
   modules: state.course.modules
-})
+});
+
+// const mapDispatchToProps = dispatch => ({
+//   toggleLesson: (module, lesson) => dispatch(CourseActions.toggleLesson(module, lesson))
+// });
 
 const mapDispatchToProps = dispatch => bindActionCreators(CourseActions, dispatch);
 

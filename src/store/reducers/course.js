@@ -18,5 +18,17 @@ const INITIAL_STATE = {
       { id: 2, title: 'Quarta aula' },
     ]
   }
-]}
+]};
+
+export default function course(state = INITIAL_STATE, action) {
+  if (action.type === 'TOGGLE_LESSON') {
+    return {
+      ...state,
+      activeModule: action.module,
+      activeLesson: action.lesson
+    };
+  }
+
+  return state;
+}
 
